@@ -1,0 +1,17 @@
+
+.container {
+  margin:1rem;
+  justify-content:flex-end;
+}
+
+.card {
+   margin:1rem;
+   width:75%;
+
+}
+.wrapper {
+  display:flex;
+  justify-content: space-between;
+}
+
+

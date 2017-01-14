@@ -1,10 +1,15 @@
 import React from 'react';
 
-const Week = (props) => {
+const Week = ({title, categories}) => {
     return (
-        <div></div>
+        <div>
+            <p>{title}</p>
+            {categories.map((category, i) => (
+                <li key={i}>{category}</li>
+            ))}
+        </div>
     )
 
-}   
+}
 
 export default Week;

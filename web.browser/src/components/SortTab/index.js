@@ -22,5 +22,6 @@ const SortTab = ({sortPopular, sortNewest}) => {
 }
 SortTab.propTypes = {
     sortPopular: PropTypes.func.isRequired,
+    sortNewest: PropTypes.func.isRequired,
 }
 export default SortTab;

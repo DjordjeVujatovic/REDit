@@ -1,11 +1,13 @@
 import React from 'react';
 import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
 import {List, ListItem} from 'material-ui/List';
+
 
 const Week = ({title, categories}) => {
     return (
         <div>
-            <h2>{title}</h2>
+            <Subheader>{title}</Subheader>
             <List>
             {categories.map((category, i) => (
                 <ListItem key={i}>{category}</ListItem>
@@ -14,7 +16,11 @@ const Week = ({title, categories}) => {
             <Divider />
         </div>
     )
+}
 
+Week.propTypes = {
+    title: React.PropTypes.string.isRequired,
+    categories: React.PropTypes.array.isRequired
 }
 
 export default Week;

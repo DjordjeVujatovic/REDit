@@ -20,7 +20,15 @@ const Post = ({title, author, description, categories, votes, updateVote}) => (
       </div>
     </div>
   </Card>
-
 );
+
+Post.propTypes = {
+  title: React.PropTypes.string.isRequired,
+  description: React.PropTypes.string.isRequired,
+  author: React.PropTypes.string.isRequired,
+  updateVote: React.PropTypes.func.isRequired,
+  votes: React.PropTypes.number.isRequired,
+  categories: React.PropTypes.array.isRequired
+}
 
 export default Post;

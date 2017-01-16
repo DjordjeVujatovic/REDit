@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Week from '../../components/Week';
 import Drawer from 'material-ui/Drawer';
 import { data } from '../../mock-data';
-import HeaderBar from '../../components/HeaderBar';
+import AppBar from 'material-ui/AppBar';
 
 class Categories extends Component {
     constructor() {
@@ -11,11 +11,12 @@ class Categories extends Component {
             weeks: data.weeks
         }
     }
+
     render() {
         return (
             <div>
                 <Drawer >
-                    <HeaderBar />
+                    <AppBar title="RED it"/>
                     {data.weeks.map((week) => (
                         <Week
                             title={week.title}

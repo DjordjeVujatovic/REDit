@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div className={styles.app}>
-        <Categories/>
+        <Categories />
         {this.props.children}
       </div>
     );

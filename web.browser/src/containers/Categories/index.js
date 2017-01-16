@@ -13,17 +13,17 @@ class Categories extends Component {
     }
     render() {
         return (
-    <div>
-        <Drawer >
-          <HeaderBar/>
-          {data.weeks.map((week)=>(
-          <Week 
-            title={week.title}
-            categories={week.categories}
-          />
-          ))}
-        </Drawer>
-    </div>
+            <div>
+                <Drawer >
+                    <HeaderBar />
+                    {data.weeks.map((week) => (
+                        <Week
+                            title={week.title}
+                            categories={week.categories}
+                            />
+                    ))}
+                </Drawer>
+            </div>
         )
     }
 };

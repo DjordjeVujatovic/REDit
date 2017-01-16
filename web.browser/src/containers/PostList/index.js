@@ -22,44 +22,44 @@ class PostList extends Component {
         this.setState({ votes: upVote })
     };
 
-    sortPopular(){
+    sortPopular() {
         const popular = this.state.posts.sort((a, b) => {
-            return(
-            b.votes - a.votes
+            return (
+                b.votes - a.votes
             )
         })
-        this.setState({posts: popular, orderBy: 'popular'})
+        this.setState({ posts: popular, orderBy: 'popular' })
     };
 
-    sortNewest(){
-        const newest = this.state.posts.sort((a, b)=> {
-            return(
+    sortNewest() {
+        const newest = this.state.posts.sort((a, b) => {
+            return (
                 parseInt(a.id) - parseInt(b.id)
             )
         })
-        this.setState({posts: newest, orderBy: 'newest'})
+        this.setState({ posts: newest, orderBy: 'newest' })
     }
 
-        render(){
+    render() {
 
-            return (
-                <div className={styles.postsContainer}>
-                    <SortTab sortPopular={this.sortPopular.bind(this)} sortNewest={this.sortNewest.bind(this)}/>
-                    {data.posts.map((post) => (
-                        <Post
-                            key={post.id}
-                            title={post.title}
-                            author={post.author}
-                            description={post.description}
-                            categories={post.categories}
-                            votes={post.votes}
-                            updateVote={this.updateVote.bind(this, post)}
-                            
-                            />
-                    ))}
-                </div>
-            )
-        }
+        return (
+            <div className={styles.postsContainer}>
+                <SortTab sortPopular={this.sortPopular.bind(this)} sortNewest={this.sortNewest.bind(this)} />
+                {data.posts.map((post) => (
+                    <Post
+                        key={post.id}
+                        title={post.title}
+                        author={post.author}
+                        description={post.description}
+                        categories={post.categories}
+                        votes={post.votes}
+                        updateVote={this.updateVote.bind(this, post)}
+
+                        />
+                ))}
+            </div>
+        )
     }
+}
 
-    export default PostList;
+export default PostList;

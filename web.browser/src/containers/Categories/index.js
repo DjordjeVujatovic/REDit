@@ -16,7 +16,7 @@ class Categories extends Component {
         return (
             <div>
                 <Drawer >
-                    <AppBar title="RED it"/>
+                    <AppBar />
                     {data.weeks.map((week) => (
                         <Week
                             title={week.title}

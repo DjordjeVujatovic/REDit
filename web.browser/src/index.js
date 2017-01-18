@@ -15,6 +15,8 @@ import {
   IndexRoute,
   browserHistory
 } from 'react-router';
+import store from './store/store';
+
 
 
 // Needed for onTouchTap (Material UI)

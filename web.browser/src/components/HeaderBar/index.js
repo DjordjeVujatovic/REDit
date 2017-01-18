@@ -18,7 +18,7 @@ const HeaderBar = () => (
   <div>
     <AppBar title="RED it">
       <FlatButton style={flatButtonStyle}>Share a new link</FlatButton>
-      <FlatButton style={flatButtonStyle}>Home</FlatButton>
+      <FlatButton style={flatButtonStyle }>Home</FlatButton>
     </AppBar>
 
   </div>

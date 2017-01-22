@@ -1,65 +1,72 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Post from '../../components/Post';
-import { data } from '../../mock-data';
 import styles from './styles.css';
 import SortTab from '../../components/SortTab';
+import { voteUp } from '../../reducers/reducers';
+import mockData from '../../mock-data';
 
 class PostList extends Component {
-    constructor() {
-        super();
-        this.state = {
-            posts: data.posts,
-            orderBy: 'newest'
-        }
-    }
 
-    updateVote(item) {
-        const upVote = this.state.posts.map((post) => {
-            if (post.id === item.id) {
-                post.votes = post.votes + 1
-            }
-        })
-        this.setState({ votes: upVote })
-    };
+  /*updateVote(item) {
+     const upVote = this.state.posts.map((post) => {
+      if (post.id === item.id) { post.votes = post.votes + 1 }
+    });
+    this.setState({ votes: upVote })
+  }
 
-    sortPopular() {
-        const popular = this.state.posts.sort((a, b) => {
-            return (
-                b.votes - a.votes
-            )
-        })
-        this.setState({ posts: popular, orderBy: 'popular' })
-    };
+  sortPopular() {
+    const popular = this.state.posts.sort((a, b) => { return (b.votes - a.votes);
+    });
+    this.setState({ posts: popular, orderBy: 'popular' });
+  }
 
-    sortNewest() {
-        const newest = this.state.posts.sort((a, b) => {
-            return (
-                parseInt(a.id) - parseInt(b.id)
-            )
-        })
-        this.setState({ posts: newest, orderBy: 'newest' })
-    }
+  sortNewest() {
+    const newest = this.state.posts.sort((a, b) => { return (parseInt(a.id) - parseInt(b.id));
+    });
+    this.setState({ posts: newest, orderBy: 'newest' })
+  }*/
 
-    render() {
+  // redux connection //
 
-        return (
-            <div className={styles.postsContainer}>
-                <SortTab sortPopular={this.sortPopular.bind(this)} sortNewest={this.sortNewest.bind(this)} />
-                {data.posts.map((post) => (
-                    <Post
-                        key={post.id}
-                        title={post.title}
-                        author={post.author}
-                        description={post.description}
-                        categories={post.categories}
-                        votes={post.votes}
-                        updateVote={this.updateVote.bind(this, post)}
 
-                        />
-                ))}
-            </div>
-        )
-    }
+  render() {
+    const { posts } = this.props;
+    
+    return (
+
+      <div className={styles.postsContainer}>
+
+        {posts.map(post => (
+          <Post
+            key={post.id}
+            title={post.title}
+            author={post.author}
+            description={post.description}
+            categories={post.categories}
+            votes={post.votes}
+            voteUp={this.props.posts.bind(this)}
+          />
+        ))}
+      </div>
+    );
+  }
 }
 
-export default PostList;
+PostList.propTypes = {
+  increment: PropTypes.func.isRequired,
+  vote: PropTypes.object.isRequired, //eslint-disable-line
+  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+const mapStateToProps = state => ({
+  posts: state.postReducer.postlist,
+});
+
+const mapDispatchToProps = dispatch => ({
+  increment: (id) => {
+    dispatch(voteUp(id));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostList);

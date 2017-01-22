@@ -1,5 +1,5 @@
 
-export const data = {
+export default {
   weeks: [{
     id: '0',
     title: 'Week 1',

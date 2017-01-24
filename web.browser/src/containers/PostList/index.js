@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Post from '../../components/Post';
 import styles from './styles.css';
 import SortTab from '../../components/SortTab';
-import { voteUp } from '../../reducers/reducers';
+import { voteUp, sortPopular, sortNew } from '../../reducers/reducers';
 
 class PostList extends Component {
 
@@ -34,6 +34,7 @@ class PostList extends Component {
     return (
 
       <div className={styles.postsContainer}>
+        <SortTab sortPopular={this.props.sortPop} sortNewest={this.props.sortNew} />
         {posts.map(post => (
           <Post
             key={post.id}
@@ -56,6 +57,8 @@ PostList.propTypes = {
   updateVote: PropTypes.func.isRequired,
   vote: PropTypes.object.isRequired, //eslint-disable-line
   posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  sortPop: PropTypes.func.isRequired,
+  sortNew: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -64,6 +67,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   updateVote: (id) => dispatch(voteUp(id)),
+  sortPop: () => dispatch(sortPopular()),
+  sortNew: () => dispatch(sortNew()),
 });
 
 

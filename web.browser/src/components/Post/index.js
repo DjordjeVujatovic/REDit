@@ -13,7 +13,7 @@ const Post = ({ title, author, description, categories, votes, voteUp, id }) => 
       <p>{description}</p>
       <p>{author}</p>
       <div className={styles.wrapper}>
-        <FlatButton onClick={(event) => { event.preventDefault(); voteUp(id); }}>Vote {votes}</FlatButton>
+        <FlatButton onClick={() => voteUp(id)}>Vote {votes}</FlatButton>
         {categories.map((category, i) => (
           <Chip key={i}>{category}</Chip>
         ))}

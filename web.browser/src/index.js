@@ -20,7 +20,6 @@ import MainLayout from './layouts/MainLayout';
 import muiTheme from './styles/mui-theme';
 import './styles/index.css';
 import { store } from './AppReducer';
-import { voteUp } from './reducers/reducers';
 
 
 // Needed for onTouchTap (Material UI)

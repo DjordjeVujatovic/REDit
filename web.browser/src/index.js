@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+
 import {
   Router,
   Route,
@@ -19,28 +19,12 @@ import CreatePost from './containers/CreatePost';
 import MainLayout from './layouts/MainLayout';
 import muiTheme from './styles/mui-theme';
 import './styles/index.css';
-import mockData from './mock-data';
-
-import { postReducer, voteUp, voteDown, sortPopular, sortNew } from './reducers/reducers';  // eslint-disable-line
-
-const appInitialState = mockData.posts;
-
-const postlist = (state = appInitialState, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
-
-const store = createStore(
-  combineReducers({ postReducer, postlist }),
-  composeWithDevTools(),
-);
+import { store } from './AppReducer';
+import { voteUp } from './reducers/reducers';
 
 
 // Needed for onTouchTap (Material UI)
 // http://stackoverflow.com/a/34015469/988941
-
 
 injectTapEventPlugin();
 

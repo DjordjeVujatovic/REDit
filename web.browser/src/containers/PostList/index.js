@@ -4,7 +4,6 @@ import Post from '../../components/Post';
 import styles from './styles.css';
 import SortTab from '../../components/SortTab';
 import { voteUp } from '../../reducers/reducers';
-import mockData from '../../mock-data';
 
 class PostList extends Component {
 
@@ -29,14 +28,12 @@ class PostList extends Component {
 
   // redux connection //
 
-
   render() {
     const { posts } = this.props;
-    
+
     return (
 
       <div className={styles.postsContainer}>
-
         {posts.map(post => (
           <Post
             key={post.id}
@@ -45,28 +42,29 @@ class PostList extends Component {
             description={post.description}
             categories={post.categories}
             votes={post.votes}
-            voteUp={this.props.posts.bind(this)}
+            id={post.id}
+            voteUp={this.props.updateVote}
           />
         ))}
+
       </div>
     );
   }
 }
 
 PostList.propTypes = {
-  increment: PropTypes.func.isRequired,
+  updateVote: PropTypes.func.isRequired,
   vote: PropTypes.object.isRequired, //eslint-disable-line
   posts: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = state => ({
-  posts: state.postReducer.postlist,
+  posts: state.posts,
 });
 
 const mapDispatchToProps = dispatch => ({
-  increment: (id) => {
-    dispatch(voteUp(id));
-  },
+  updateVote: (id) => dispatch(voteUp(id)),
 });
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);

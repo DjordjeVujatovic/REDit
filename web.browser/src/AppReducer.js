@@ -1,23 +1,12 @@
-import { combineReducers, createStore } from 'redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { postReducer } from './reducers/reducers';
-import mockData from './mock-data';
-
-const weeksInitialState = mockData.weeks;
-
-const weeksState = (state = weeksInitialState, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
-
+import thunk from 'redux-thunk';
+import { postReducer, weeksReducer } from './reducers/reducers';
 
 export const store = createStore(
-  combineReducers({ 
-    posts: postReducer,
-    weeks: weeksState,
+  combineReducers({
+    postList: postReducer,
+    weeks: weeksReducer,
   }),
-  composeWithDevTools(),
+  composeWithDevTools(applyMiddleware(thunk)),
 );
-

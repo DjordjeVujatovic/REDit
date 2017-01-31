@@ -14,6 +14,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import App from './containers/App';
 import Welcome from './containers/Welcome';
 import Login from './containers/Login';
+import Post from './components/Post';
 import PostList from './containers/PostList';
 import CreatePost from './containers/CreatePost';
 import MainLayout from './layouts/MainLayout';
@@ -34,12 +35,12 @@ ReactDOM.render(
         <Route component={MainLayout}>
           <Route path="/" component={App}>
             <IndexRoute component={Welcome} />
-            <Route path="/Login" component={Login} />
-            <Route path="/posts">
-              <Route path="/new" component={CreatePost} />
-              <Route path=":name" component={PostList} />
+            <Route path="posts">
+              <Route path="new" component={CreatePost} />
+              <Route path=":category" component={PostList} />
             </Route>
           </Route>
+          <Route path="login" component={Login} />
         </Route>
       </Router>
     </MuiThemeProvider>

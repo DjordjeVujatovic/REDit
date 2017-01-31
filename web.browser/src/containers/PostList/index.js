@@ -7,25 +7,6 @@ import { voteUp, sortPopular, sortNew, fetchPosts } from '../../reducers/reducer
 
 class PostList extends Component {
 
-  /*updateVote(item) {
-     const upVote = this.state.posts.map((post) => {
-      if (post.id === item.id) { post.votes = post.votes + 1 }
-    });
-    this.setState({ votes: upVote })
-  }
-
-  sortPopular() {
-    const popular = this.state.posts.sort((a, b) => { return (b.votes - a.votes);
-    });
-    this.setState({ posts: popular, orderBy: 'popular' });
-  }
-
-  sortNewest() {
-    const newest = this.state.posts.sort((a, b) => { return (parseInt(a.id) - parseInt(b.id));
-    });
-    this.setState({ posts: newest, orderBy: 'newest' })
-  }*/
-
   // redux connection //
 
   componentWillMount() {

@@ -24,7 +24,6 @@ class Login extends Component {
                   hintText="Email"
                   errorText="Please enter your email."
                   floatingLabelText="Email"
-                  width="100%"
                 /><br />
 
                 <TextField

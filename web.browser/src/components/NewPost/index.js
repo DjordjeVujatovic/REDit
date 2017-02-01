@@ -9,7 +9,7 @@ import styles from './style.css';
 
 const NewPost = () => (
   <div className={styles.formContainer}>
-    <Card>
+    <Card className={styles.card}>
       <Paper>
         <Toolbar>
           <ToolbarTitle text="Share a new link" />
@@ -17,29 +17,44 @@ const NewPost = () => (
         <CardText>
           <form>
             <TextField
+              style={{
+                width: '100%',
+              }}
               hintText="Title"
               errorText="Please provide a title"
               floatingLabelText="Title"
             /><br />
 
             <TextField
+              style={{
+                width: '100%',
+              }}
               hintText="Description"
               errorText="Please provide a description"
               floatingLabelText="Description"
             /><br />
 
             <SelectField
+              style={{
+                width: '100%',
+              }}
               floatingLabelText="Select a lesson"
             >
             </SelectField><br />
 
             <TextField
+              style={{
+                width: '100%',
+              }}
               hintText="Link"
               errorText="You're sharing a link, provide a link"
               floatingLabelText="Link"
             /><br />
 
             <TextField
+              style={{
+                width: '100%',
+              }}
               hintText="Tags"
               floatingLabelText="Tags"
             /><br />

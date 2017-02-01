@@ -18,12 +18,19 @@ class Login extends Component {
             <CardText>
               <form>
                 <TextField
+                  style={{
+                    width: '100%',
+                  }}
                   hintText="Email"
                   errorText="Please enter your email."
                   floatingLabelText="Email"
+                  width="100%"
                 /><br />
 
                 <TextField
+                  style={{
+                    width: '100%',
+                  }}
                   hintText="Password"
                   errorText="Please enter your password."
                   floatingLabelText="Password"

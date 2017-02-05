@@ -2,6 +2,10 @@ const nconf = require('nconf');
 const config = module.exports = nconf.argv()
 
 .env([
+  'POSTGRES_HOST',
+  'POSTGRES_USER',
+  'POSTGRES_PASSWORD',
+  'POSTGRES_DBNAME',
   'APP_SECRET',
   'STATIC_PATH'
 ])

@@ -12,9 +12,9 @@ const LOADING_RESOURCE = 'LOADING_RESOURCE';
 
 // ACTION CREATORS
 
-const updatePosts = posts => ({ type: 'UPDATE_POSTS', payload: posts });
+// const updatePosts = posts => ({ type: 'UPDATE_POSTS', payload: posts });
 
-const updateWeeks = weeks => ({ type: 'UPDATE_WEEKS', payload: weeks});
+const updateWeeks = weeks => ({ type: 'UPDATE_WEEKS', payload: weeks });
 
 const loadResource = () => ({ type: LOADING_RESOURCE });
 
@@ -28,17 +28,17 @@ export const sortNew = () => ({ type: 'SORT_NEW' });
 
 // THUNK
 
-export const fetchPosts = () => {
-  return (dispatch) => {
-    getJson('http://localhost:8000/posts').then((res) => {
-      dispatch(updatePosts(res));
-    });
-  };
+const weeksRequest = {
+  method: 'GET',
+  credentials: 'include',
+  headers: new Headers({
+    'Content-Type': 'application/json;charset=UTF-8',
+  }),
 };
 
 export const fetchWeeks = () => {
   return (dispatch) => {
-    getJson('http://localhost:8000/weeks').then((res) => {
+    getJson('http://localhost:8000/api/weeks', weeksRequest).then((res) => {
       dispatch(updateWeeks(res));
     });
   };

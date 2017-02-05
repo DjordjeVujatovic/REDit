@@ -1,31 +1,28 @@
-// FetchJson, a Fetch wrapper to aid in our sanity
-// Meant for use with JSON APIs and async/await
-
-const fetchJson = (url, params = {method: 'GET'}) => {
-    const headers = { 'Content-Type': 'application/json'};
-    return fetch(url, Object.assign(params, headers)).then(res => {
-        if (res.ok) return res.json();
-        throw createErrorContext(url, params);
-    });
-};
-
-const requestJson = (url, body, method) => {
-    fetchJson( url, {method, body })
-}
-
 const createErrorContext = (url, params) => {
-    return {
-        name: 'FetchJsonError',
-        url,
-        params
-    }
+  return {
+    name: 'FetchJsonError',
+    url,
+    params,
+  };
 };
 
-const getJson = fetchJson;
-const postJson = (url, body) =>  requestJson(url, body, 'POST');
-const putJson = (url, body) => requestJson(url, body, 'PUT');
-const deleteJson = (url) => requestJson(url, null, 'DELETE');
+const fetchJSON = (url, params = { method: 'GET', credentials: 'include' }) => {
+  const headers = { 'Content-Type': 'application/json; charset=utf-8' };
 
+  return fetch(url, Object.assign(params, headers)).then((res) => {
+    if (res.ok) return res.json();
+    throw createErrorContext(url, params);
+  });
+};
 
+const requestJSON = (url, body, method) => (
+  fetchJSON(url, { method, body })
+);
 
-export { getJson, postJson, putJson, deleteJson };
+// api of library
+const getJSON = fetchJSON;
+const postJSON = (url, body) => requestJSON(url, body, 'POST');
+const putJSON = (url, body) => requestJSON(url, body, 'PUT');
+const deleteJSON = url => requestJSON(url, null, 'DELETE');
+
+export { getJSON, postJSON, putJSON, deleteJSON };

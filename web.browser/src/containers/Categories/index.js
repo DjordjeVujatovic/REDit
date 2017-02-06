@@ -28,7 +28,6 @@ class Categories extends Component {
               categories={week.category}
               title={week.title}
               filterClick={this.props.handleFilterCategory}
-              onClick={}
             />
                     ))}
         </Drawer>

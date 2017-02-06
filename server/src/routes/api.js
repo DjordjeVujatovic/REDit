@@ -21,8 +21,25 @@ router.use((req, res, next) => {
   next();
 })
 
-router.get('/posts:categoryId', (req, res) => {
-  database.query('SELECT * FROM posts WHERE "categoryId" = $1', [req.params.cateogryId]).then((response)=>{
+router.get('/posts/1', (req, res) => {
+const postsQuery = `select
+                    "posts"."postId",
+                    posts.title,
+                    posts.date,
+                    posts.description,
+                    posts.votes,
+                    json_agg(category.title) as category,
+                    json_agg(tags.name) as tags
+                    from
+                      posts
+                      inner join category on category."categoryId" = "posts"."categoryId"
+                      left outer join posttags on "posttags"."postId" = "posts"."postId"
+                      left outer join tags on tags."tagId" = tags."tagId"
+                    group by
+                      "posts"."postId"
+                    order by
+                      "posts"."postId" asc`
+                  database.query(postsQuery, []).then((response)=>{
     res.json(response.rows);
   }).catch((error)=> {
     res.status(500).json({error});

@@ -10,7 +10,7 @@ const Week = ({ title, categories }) => {
       <Subheader>{title}</Subheader>
       <List>
         {categories.map((category, i) => (
-          <ListItem key={i}>{category}</ListItem>
+          <ListItem key={i.toString()}>{category.title}</ListItem>
             ))}
       </List>
       <Divider />

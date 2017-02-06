@@ -1,4 +1,4 @@
-import { getJson } from '../lib/fetch-json';
+import { getJSON } from '../lib/fetch-json';
 
 // ACTIONS ..
 
@@ -14,9 +14,9 @@ const LOADING_RESOURCE = 'LOADING_RESOURCE';
 
 // const updatePosts = posts => ({ type: 'UPDATE_POSTS', payload: posts });
 
-const updateWeeks = weeks => ({ type: 'UPDATE_WEEKS', payload: weeks });
+const updateWeeks = weeks => ({ type: UPDATE_WEEKS, payload: weeks });
 
-const loadResource = () => ({ type: LOADING_RESOURCE });
+const loadResource = () => ({ type: 'LOADING_RESOURCE' });
 
 export const voteUp = id => ({ type: 'VOTE_UP', payload: { id } });
 
@@ -28,25 +28,35 @@ export const sortNew = () => ({ type: 'SORT_NEW' });
 
 // THUNK
 
-const weeksRequest = {
+/*const weeksRequest = {
   method: 'GET',
   credentials: 'include',
   headers: new Headers({
     'Content-Type': 'application/json;charset=UTF-8',
   }),
-};
+};*/
 
-export const fetchWeeks = () => {
-  return (dispatch) => {
-    getJson('http://localhost:8000/api/weeks', weeksRequest).then((res) => {
+export const fetchWeeks = () => dispatch => (
+    getJSON('http://localhost:8000/api/weeks').then((res) => {
       dispatch(updateWeeks(res));
+    })
+  );
+
+
+
+
+
+export const fetchPosts = () => {
+  return (dispatch) => {
+    getJSON('http://localhost:8000/api/posts/1').then((posts) => {
+      dispatch(updateWeeks(posts));
     });
   };
 };
 
 // POST REDUCERS
 
-export const postReducer = ( state = [], action) => { //eslint-disable-line
+export const postReducer = ( state = [], action ) => { //eslint-disable-line
   switch (action.type) {
     case LOADING_RESOURCE:
       return { ...state, loadingResource: true };

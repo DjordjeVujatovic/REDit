@@ -9,7 +9,7 @@ const createErrorContext = (url, params) => {
 const fetchJSON = (url, params = { method: 'GET', credentials: 'include' }) => {
   const headers = { 'Content-Type': 'application/json; charset=utf-8' };
 
-  return fetch(url, Object.assign(params, headers)).then((res) => {
+  return fetch(url, Object.assign(headers, params)).then((res) => {
     if (res.ok) return res.json();
     throw createErrorContext(url, params);
   });

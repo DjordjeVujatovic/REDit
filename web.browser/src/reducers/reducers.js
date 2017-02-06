@@ -1,7 +1,7 @@
 import { getJSON } from '../lib/fetch-json';
 
 // ACTIONS ..
-
+const FILTER = 'FILTER';
 const VOTE_UP = 'VOTE_UP';
 const VOTE_DOWN = 'VOTE_DOWN';
 const SORT_POP = 'SORT_POP';
@@ -14,17 +14,22 @@ const LOADING_RESOURCE = 'LOADING_RESOURCE';
 
 // const updatePosts = posts => ({ type: 'UPDATE_POSTS', payload: posts });
 
-const updateWeeks = weeks => ({ type: UPDATE_WEEKS, payload: weeks });
+const updateWeeks = weeks => ({ type: 'UPDATE_WEEKS', payload: weeks });
+
+const updatePosts = posts => ({ type: 'UPDATE_POSTS', payload: posts });
 
 const loadResource = () => ({ type: 'LOADING_RESOURCE' });
 
-export const voteUp = id => ({ type: 'VOTE_UP', payload: { id } });
+export const voteUp = postId => ({ type: 'VOTE_UP', payload: { postId } });
 
 export const voteDown = id => ({ type: 'VOTE_DOWN', payload: { id } });
 
 export const sortPopular = () => ({ type: 'SORT_POP' });
 
 export const sortNew = () => ({ type: 'SORT_NEW' });
+
+export const filterCategory = category => ({ type: 'FILTER', payload: { category } });
+
 
 // THUNK
 
@@ -41,18 +46,11 @@ export const fetchWeeks = () => dispatch => (
       dispatch(updateWeeks(res));
     })
   );
-
-
-
-
-
-export const fetchPosts = () => {
-  return (dispatch) => {
-    getJSON('http://localhost:8000/api/posts/1').then((posts) => {
-      dispatch(updateWeeks(posts));
-    });
-  };
-};
+export const fetchPosts = () => dispatch => (
+    getJSON('http://localhost:8000/api/posts/1').then((res) => {
+      dispatch(updatePosts(res));
+    })
+  );
 
 // POST REDUCERS
 
@@ -64,7 +62,7 @@ export const postReducer = ( state = [], action ) => { //eslint-disable-line
       return [...state, ...action.payload];
     case VOTE_UP:
       return state.map((post) => {
-        if (post.id !== action.payload.id) return post;
+        if (post.postId !== action.payload.postId) return post;
         return { ...post, votes: post.votes + 1 };
       });
     case VOTE_DOWN:
@@ -75,7 +73,7 @@ export const postReducer = ( state = [], action ) => { //eslint-disable-line
     case SORT_POP:
       return [...state].slice().sort((a, b) => (b.votes - a.votes));
     case SORT_NEW:
-      return [...state].slice().sort((a, b) => parseInt(a.id, 10) - parseInt(b.id, 10));
+      return [...state].slice().sort((a, b) => parseInt(a.postId, 10) - parseInt(b.postId, 10));
     default:
       return state;
   }
@@ -91,4 +89,17 @@ export const weeksReducer = (state = [], action) => {
       return state;
   }
 };
+
+// FILTER REDUCER
+
+export const filterReducer = (state = [], action) => {
+  switch (action.type) {
+    case FILTER:
+      return action.payload.category;
+    default:
+      return state;
+  }
+};
+
+
 

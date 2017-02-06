@@ -47,21 +47,20 @@ const postsQuery = `select
 })
 
 router.get('/weeks', (req, res) => {
-  console.log('hi1')
-    database.query(`select
+const weeksQuery = `select
                       weeks."weekId",
                       weeks.title,
-                      json_agg(json_build_object("categoryId", category."categoryId", 'category', category.title)) as category
+                      json_agg(category.title) as category
                     from
                       weeks
                       inner join category on category.weekid = weeks."weekId"
                     group by
                       weeks."weekId"
                     order by
-                      weeks.title asc;`).then((response)=> {
-                          console.log('hi3')
+                      weeks.title asc;`; database.query(weeksQuery, []).then((response)=> {
+                   
       res.json(response.rows);
-        console.log('hi3')
+  
     }).catch((error)=> {
       console.log(error)
     res.status(500).json({error});

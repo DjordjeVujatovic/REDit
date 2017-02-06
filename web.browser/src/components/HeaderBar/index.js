@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -11,8 +12,12 @@ const flatButtonStyle = {
 const HeaderBar = () => (
   <div>
     <AppBar title="RED it">
-      <FlatButton style={flatButtonStyle}>Share a new link</FlatButton>
-      <FlatButton style={flatButtonStyle}>Home</FlatButton>
+      <Link to="/posts/new">
+        <FlatButton style={flatButtonStyle}>Share a new link</FlatButton>
+      </Link>
+      <Link to="/">
+        <FlatButton style={flatButtonStyle}>Home</FlatButton>
+      </Link>
     </AppBar>
 
   </div>

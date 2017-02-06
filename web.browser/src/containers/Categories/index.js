@@ -5,7 +5,7 @@ import Drawer from 'material-ui/Drawer';
 import CommunicationImportContacts from 'material-ui/svg-icons/communication/import-contacts';
 import IconButton from 'material-ui/IconButton';
 import Week from '../../components/Week';
-import { fetchWeeks } from '../../reducers/reducers';
+import { fetchWeeks, filterCategory } from '../../reducers/reducers';
 
 
 class Categories extends Component {
@@ -27,6 +27,7 @@ class Categories extends Component {
               key={i}
               categories={week.category}
               title={week.title}
+              filterClick={this.props.handleFilterCategory}
             />
                     ))}
         </Drawer>
@@ -36,6 +37,7 @@ class Categories extends Component {
 }
 Categories.propTypes = {
   weeks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleFilterCategory: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -43,6 +45,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  handleFilterCategory: (category) => {
+    dispatch(filterCategory(category));
+  },
   fetchWeeks: () => {
     dispatch(fetchWeeks());
   },

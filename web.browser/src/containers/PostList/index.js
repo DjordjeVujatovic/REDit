@@ -15,16 +15,20 @@ class PostList extends Component {
 
   renderPosts() {
     const posts = this.props.posts;
-    return posts.map(post => (
+    const filter = this.props.filter;
+
+    return posts
+    .filter(post => post.category.includes(filter))
+    .map(post => (
       <Post
-        key={post.id}
+        key={post.postId}
         title={post.title}
-        author={post.author}
         description={post.description}
-        categories={post.categories}
+        categories={post.category}
         votes={post.votes}
-        id={post.id}
+        id={post.postId}
         voteUp={this.props.updateVote}
+        tags={post.tags}
       />
     ));
   }
@@ -45,10 +49,12 @@ PostList.propTypes = {
   posts: PropTypes.array.isRequired, //eslint-disable-line
   sortPop: PropTypes.func.isRequired,
   sortNew: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   posts: state.postList,
+  filter: state.filter,
 });
 
 const mapDispatchToProps = dispatch => ({

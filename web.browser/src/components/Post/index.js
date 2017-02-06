@@ -5,22 +5,22 @@ import Chip from 'material-ui/Chip';
 import styles from './styles.css';
 
 
-const Post = ({ title, author, description, categories, votes, voteUp, id }) => (
+const Post = ({ title, description, categories, votes, voteUp, id, tags }) => (
 
   <Card className={styles.card}>
     <div className={styles.container}>
       <a href="">{title}</a>
       <p>{description}</p>
-      <p>{author}</p>
       <div className={styles.wrapper}>
         <FlatButton onClick={() => voteUp(id)}>Vote {votes}</FlatButton>
-        {categories.map((category, i) => (
-          <Chip key={i}>{category}</Chip>
+        {tags.map((tag) => (
+          <Chip>{tag}</Chip>
         ))}
       </div>
     </div>
   </Card>
 );
+
 
 Post.propTypes = {
   title: React.PropTypes.string.isRequired,
